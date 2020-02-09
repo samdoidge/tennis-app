@@ -7,11 +7,22 @@ interface MatchBase<T> {
 
 export interface MatchSummary extends MatchBase<MatchSummarySideObject> {}
 
+export interface MatchToCreate {
+  side1: Array<MatchSummarySideObject>;
+  side2: Array<MatchSummarySideObject>;
+}
+
+export interface MatchCreated {
+  id: string;
+}
+
 export enum MatchStatus {
   Created = 'Created',
   Playing = 'Playing',
   Finished = 'Finished'
 }
+
+
 
 export interface MatchSummarySideObject {
   name: string;

@@ -1,0 +1,29 @@
+@import '../../../variables.scss';
+
+.form-control.ng-touched.ng-invalid,
+.submitted .form-control.ng-invalid {
+  border: 1px solid $error-colour;
+}
+.form-control.ng-touched.ng-valid,
+.submitted .form-control.ng-valid {
+  border: 1px solid $success-colour;
+}
+
+.card {
+  margin-bottom: 1rem;
+}
+
+.match-type {
+  margin-bottom: 1rem;
+}
+
+.form-control {
+  max-width: 30rem;
+}
+
+.error-message {
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 80%;
+  color: $error-colour;
+}

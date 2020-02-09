@@ -1,1 +1,45 @@
-<p>match-form works!</p>
+<p>
+  <button
+    type="button"
+    class="btn btn-outline-primary"
+    (click)="isCollapsed = !isCollapsed"
+    [attr.aria-expanded]="!isCollapsed"
+    aria-controls="collapseExample"
+  >
+    Create Match
+  </button>
+</p>
+<div class="card" [ngbCollapse]="isCollapsed">
+  <div class="card-body">
+    <h4 class="card-title">Create match</h4>
+    <h6>Match type</h6>
+    <div class="btn-group btn-group-toggle match-type" ngbRadioGroup name="radioBasic" [(ngModel)]="matchType">
+      <label ngbButtonLabel class="btn-primary" (click)="setSingles()"> <input ngbButton type="radio" [value]="1" /> Singles </label>
+      <label ngbButtonLabel class="btn-primary" (click)="setDoubles()"> <input ngbButton type="radio" [value]="2" /> Doubles </label>
+    </div>
+    <form #form [formGroup]="createMatchForm" (ngSubmit)="onSubmit()" [ngClass]="{ submitted: submitted }">
+      <h6>Side 1</h6>
+      <div formArrayName="side1">
+        <div class="form-group" *ngFor="let control of side1.controls; index as i">
+          <input type="text" class="form-control" [formControlName]="i" [placeholder]="getPlaceholder(i + 1)" />
+          <ng-container *ngIf="(control.touched || submitted) && control.hasError('required')">
+            <span class="error-message">{{ getPlaceholder(i + 1) }} is required.</span>
+          </ng-container>
+        </div>
+      </div>
+      <h6>Side 2</h6>
+      <div formArrayName="side2">
+        <div class="form-group" *ngFor="let control of side2.controls; index as i">
+          <input type="text" class="form-control" [formControlName]="i" [placeholder]="getPlaceholder(i + 1)" />
+          <ng-container *ngIf="(control.touched || submitted) && control.hasError('required')">
+            <span class="error-message">{{ getPlaceholder(i + 1) }} is required.</span>
+          </ng-container>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary">
+        Submit
+      </button>
+    </form>
+  </div>
+</div>
