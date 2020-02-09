@@ -12,6 +12,7 @@ import { MatchFormComponent } from './match-form/match-form.component';
 
 @NgModule({
   declarations: [MatchComponent, MatchListComponent, MatchSummaryComponent, MatchDetailComponent, MatchFormComponent],
-  imports: [CommonModule, MatchRoutingModule, FormsModule, ReactiveFormsModule, NgbModule]
+  imports: [CommonModule, MatchRoutingModule, FormsModule, ReactiveFormsModule, NgbModule],
+  exports: [MatchComponent, MatchListComponent, MatchSummaryComponent, MatchDetailComponent, MatchFormComponent]
 })
 export class MatchModule {}
