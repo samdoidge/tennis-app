@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { MatchDetail } from './match.types';
+import { MatchDetail, MatchSummary } from './match.types';
 
 @Injectable({
   providedIn: 'root'
@@ -10,11 +10,11 @@ import { MatchDetail } from './match.types';
 export class MatchService {
   constructor(private http: HttpClient) {}
 
-  getMatch(id): Observable<MatchDetail> {
+  getMatch(id: string): Observable<MatchDetail> {
     return this.http.get<MatchDetail>(`${environment.apiUrl}matches/${id}`);
   }
 
-  getMatches(): Observable<any> {
-    return this.http.get(`${environment.apiUrl}matches`);
+  getMatches(): Observable<MatchSummary[]> {
+    return this.http.get<MatchSummary[]>(`${environment.apiUrl}matches`);
   }
 }
