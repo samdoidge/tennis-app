@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatchStatus, MatchSummary } from './match.types';
 import { MatchService } from './match.service';
 import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-match',
@@ -11,9 +12,10 @@ import { ToastrService } from 'ngx-toastr';
 export class MatchComponent implements OnInit {
   matchList: MatchSummary[] = [];
 
-  constructor(private matchService: MatchService, private toastr: ToastrService) {}
+  constructor(private matchService: MatchService, private spinner: NgxSpinnerService, private toastr: ToastrService) {}
 
   ngOnInit() {
+    this.spinner.show();
     this.getMatches();
   }
 
@@ -21,11 +23,11 @@ export class MatchComponent implements OnInit {
     this.matchService.getMatches().subscribe(
       data => {
         this.matchList = data.filter(m => m.status === MatchStatus.Playing);
-        console.log(this.matchList);
+        this.spinner.hide();
       },
       error => {
         this.toastr.error(error.message, 'Error');
-        console.log(error.message);
+        this.spinner.hide();
       }
     );
   }
