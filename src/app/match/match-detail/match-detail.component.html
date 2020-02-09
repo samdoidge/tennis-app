@@ -1,1 +1,28 @@
-<p>match-detail works!</p>
+<div class="col mb-4" *ngIf="matchDetail">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">
+        {{ side1Names }}
+        <span class="badge badge-info">{{ side1Score }}</span> - <span class="badge badge-info">{{ side2Score }}</span> {{ side2Names }}
+        <span class="badge badge-success">{{ matchDetail.status }}</span>
+      </h5>
+
+      <div class="row">
+        <div class="col-sm">
+          {{ side1Names }}
+        </div>
+        <div class="col-sm" *ngFor="let set of matchDetail.sets">
+          {{ set.side1Score }}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm">
+          {{ side2Names }}
+        </div>
+        <div class="col-sm" *ngFor="let set of matchDetail.sets">
+          {{ set.side2Score }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
