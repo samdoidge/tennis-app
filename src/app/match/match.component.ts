@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatchStatus, MatchSummary } from './match.types';
 import { MatchService } from './match.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-match',
@@ -10,7 +11,7 @@ import { MatchService } from './match.service';
 export class MatchComponent implements OnInit {
   matchList: MatchSummary[] = [];
 
-  constructor(private matchService: MatchService) {}
+  constructor(private matchService: MatchService, private toastr: ToastrService) {}
 
   ngOnInit() {
     this.getMatches();
@@ -23,6 +24,7 @@ export class MatchComponent implements OnInit {
         console.log(this.matchList);
       },
       error => {
+        this.toastr.error(error.message, 'Error');
         console.log(error.message);
       }
     );
